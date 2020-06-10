@@ -11,7 +11,7 @@ import {
   notification,
   Avatar,
 } from "antd";
-import { EditOutlined, DeleteFilled } from "@ant-design/icons";
+import { EditOutlined, DeleteFilled, UndoOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { fetchUserList, logout, deleteUser, updateUser } from "../../actions";
 const { Meta } = Card;
@@ -25,6 +25,10 @@ const UserListComponent = (props) => {
     deleteUser,
     updateUser,
   } = props;
+
+  const [edit, setEdit] = useState("");
+  const [name, setName] = useState("");
+
   let timer;
   const setTimer = () => {
     timer = setTimeout(() => {
@@ -65,7 +69,25 @@ const UserListComponent = (props) => {
             <Card
               style={{ width: 300 }}
               actions={[
-                <EditOutlined key="edit" />,
+                <div>
+                  {user._id == edit ? (
+                    <UndoOutlined
+                      key="undo"
+                      onClick={() => {
+                        setEdit("");
+                        setName("");
+                      }}
+                    ></UndoOutlined>
+                  ) : (
+                    <EditOutlined
+                      key="edit"
+                      onClick={() => {
+                        setEdit(user._id);
+                        setName(user.name);
+                      }}
+                    />
+                  )}
+                </div>,
 
                 <Popconfirm
                   title={"Are you sure ?"}
@@ -84,7 +106,23 @@ const UserListComponent = (props) => {
               <Meta
                 style={{ textTransform: "capitalize" }}
                 avatar={<Avatar>{user.name[0]}</Avatar>}
-                title={user.name}
+                title={
+                  user._id == edit ? (
+                    <input
+                      value={name}
+                      onKeyUp={(e) => {
+                        if (e.which == 13) {
+                          updateUser(id, { name });
+                        }
+                      }}
+                      onChange={(e) => {
+                        setName(e.target.value);
+                      }}
+                    ></input>
+                  ) : (
+                    user.name
+                  )
+                }
                 description={`added at ${moment(user.createdAt).format(
                   "DD MMM YY LT"
                 )}`}

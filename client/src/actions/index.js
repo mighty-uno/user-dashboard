@@ -71,7 +71,7 @@ export const fetchUserList = (req = {}) => async (dispatch) => {
 
 export const updateUser = (id, req = {}) => async (dispatch) => {
   try {
-    const payload = await axios.put(`api/user/${id}`, req);
+    const payload = await axios.patch(`api/user/${id}`, req);
 
     if (payload.data.error) {
       notification.error({
@@ -81,7 +81,7 @@ export const updateUser = (id, req = {}) => async (dispatch) => {
     } else if (payload.data) {
       dispatch({
         type: USER_UPDATE,
-        payload: payload.data,
+        payload: req,
       });
 
       return true;

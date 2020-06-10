@@ -14,5 +14,5 @@ module.exports = {
     },
   },
   JWT_SECRET: "saoasn89uas98ynuasoy78a8st8viuyas8ty7astuyiusayubiuhsuyj",
-  JWT_EXPIRY: 60 * 60 * 24 * 30, //30Days
+  JWT_EXPIRY: "1m", //30Days
 };

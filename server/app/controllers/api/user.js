@@ -31,7 +31,7 @@ class UserController {
     } = req;
 
     try {
-      const result = await User.replaceOne({ _id: id }, data);
+      const result = await User.updateOne({ _id: id }, data);
       res.send(result);
     } catch (err) {
       console.log(err);
