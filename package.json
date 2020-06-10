@@ -1,0 +1,20 @@
+{
+  "name": "user-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/server/index.js",
+  "scripts": {
+    "start-dev": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArwanHimanshu/user-dashboard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArwanHimanshu/user-dashboard/issues"
+  },
+  "homepage": "https://github.com/ArwanHimanshu/user-dashboard#readme",
+  "dependencies": {}
+}

@@ -1,0 +1,15 @@
+# dependencies
+/server/node_modules
+/client/node_modules
+/client/build
+/dist
+
+#files
+/server/package-json.lock
+/client/package-json.lock
+
+
+#Log
+npm-debug.log*
+upload
+build.sh
