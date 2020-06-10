@@ -29,7 +29,7 @@ const jwtLogin = new JwtStrategy(jwtOptions, async function (payload, done) {
       done(null, false);
     }
   } catch (err) {
-    done(err, false);
+    done(err, err.message);
   }
 }); //payload is decoded json token
 
@@ -52,10 +52,10 @@ const localLogin = new LocalStrategy(localoptions, async function (
       email,
       isActive: true,
     });
-    if (!user) return done(null, false);
+    if (!user) return done("user not found", false);
 
     const isMatch = await user.comparePassword(password);
-    if (!isMatch) return done(null, false);
+    if (!isMatch) return done("password not valid", false);
     delete user.password;
     return done(null, user);
   } catch (err) {

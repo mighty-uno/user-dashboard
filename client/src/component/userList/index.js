@@ -38,9 +38,9 @@ const UserListComponent = (props) => {
   useEffect(() => {
     fetchUserList();
     notification.success({ message: "You will be auto logout after 1 minute" });
-    // setTimer();
+    setTimer();
     return () => {
-      // clearInterval(timer);
+      clearInterval(timer);
     };
   }, []);
 
@@ -65,7 +65,7 @@ const UserListComponent = (props) => {
       ></PageHeader>
       <Row gutter={8}>
         {userList.map((user) => (
-          <Col key={user._id} span={8}>
+          <Col key={user._id} span={4}>
             <Card
               style={{ width: 300 }}
               actions={[
@@ -110,9 +110,12 @@ const UserListComponent = (props) => {
                   user._id == edit ? (
                     <input
                       value={name}
-                      onKeyUp={(e) => {
+                      onKeyUp={async (e) => {
                         if (e.which == 13) {
-                          updateUser(id, { name });
+                          const result = await updateUser(user._id, { name });
+                          if (result) {
+                            setEdit("");
+                          }
                         }
                       }}
                       onChange={(e) => {

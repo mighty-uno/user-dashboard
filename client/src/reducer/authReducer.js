@@ -12,7 +12,6 @@ export default function (
         isAuthenticated: action.payload && true,
       };
     case USER_AUTH_LOGOUT:
-      debugger;
       return { loading: false, user: null, isAuthenticated: false };
 
     default:

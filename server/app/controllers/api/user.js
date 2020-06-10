@@ -26,12 +26,12 @@ class UserController {
 
   async update(req, res) {
     const {
-      body: { data },
+      body,
       params: { id },
     } = req;
 
     try {
-      const result = await User.updateOne({ _id: id }, data);
+      const result = await User.updateOne({ _id: id }, body);
       res.send(result);
     } catch (err) {
       console.log(err);

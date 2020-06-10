@@ -23,9 +23,8 @@ const Login = (props) => {
   const checkUser = async () => {
     await getUser();
   };
-  debugger;
+
   if (auth.user) {
-    //redirect when user login is successfully
     return <Redirect to={from} />;
   } else {
     checkUser();

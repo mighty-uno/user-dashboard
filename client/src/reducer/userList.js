@@ -11,10 +11,9 @@ export default function (state = [], action) {
       return state;
 
     case USER_UPDATE:
-      state = [
-        ...state.filter((user) => user._id != action.payload._id),
-        action.payload,
-      ];
+      let index = state.findIndex((user) => user._id == action.payload._id);
+      Object.assign(state[index], action.payload);
+      state = [...state];
       return state;
 
     default:

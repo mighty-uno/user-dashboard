@@ -28,6 +28,8 @@ export const login = (req) => async (dispatch) => {
       });
     }
   } catch (e) {
+    console.log(e);
+    debugger;
     notification.error({
       message: "Sign in",
       description: "Server Error!",
@@ -43,6 +45,7 @@ export const logout = (req) => async (dispatch) => {
     });
     return true;
   } catch (e) {
+    notification.error({ message: e });
     return false;
   }
 };
@@ -81,12 +84,13 @@ export const updateUser = (id, req = {}) => async (dispatch) => {
     } else if (payload.data) {
       dispatch({
         type: USER_UPDATE,
-        payload: req,
+        payload: { _id: id, ...req },
       });
 
       return true;
     }
   } catch (e) {
+    notification.error({ message: e });
     return false;
   }
 };
@@ -109,6 +113,7 @@ export const deleteUser = (id, req = {}) => async (dispatch) => {
       return true;
     }
   } catch (e) {
+    notification.error({ message: e });
     return false;
   }
 };
@@ -130,7 +135,7 @@ export const getUser = () => async (dispatch) => {
 export const signup = (req) => async (dispatch) => {
   try {
     const payload = await axios.post("auth/signup", req);
-    debugger;
+
     if (payload.data.error) {
       notification.error({
         message: "Sign-up error",
